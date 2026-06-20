@@ -1,232 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farhad Dev | Developer Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Car Runner PRO MAX</title>
     <style>
-        :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent: #38bdf8;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding: 20px;
-        }
-
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            color: var(--accent);
-            margin-bottom: 10px;
-        }
-
-        header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
-
-        .main-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            margin: 30px 0 20px 0;
-            border-bottom: 2px solid var(--card-bg);
-            padding-bottom: 8px;
-            color: var(--accent);
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
-        @media (min-width: 768px) {
-            .projects-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .project-card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 25px;
-            border-left: 5px solid var(--accent);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.2s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .project-info h3 {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-        }
-
-        .project-info p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .proj-link {
-            text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            transition: background 0.2s;
-        }
-
-        .code-link {
-            background-color: transparent;
-            color: var(--text-main);
-            border: 1px solid var(--text-muted);
-        }
-
-        .code-link:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .demo-link {
-            background-color: var(--accent);
-            color: #000;
-        }
-
-        .demo-link:hover {
-            opacity: 0.9;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px 0;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
+        body { margin: 0; overflow: hidden; background: #0b0f19; font-family: sans-serif; }
+        canvas { display: block; width: 100vw; height: 100vh; }
+        #ui { position: absolute; top: 20px; width: 100%; text-align: center; color: white; font-size: 24px; pointer-events: none; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Farhad Dev</h1>
-        <p>Frontend Developer & Game Creator | Building Web Apps & Interactive Canvas Games</p>
-    </header>
+    <div id="ui">Score: 0</div>
+    <canvas id="game"></canvas>
 
-    <div class="main-container">
-        <h2 class="section-title">My Projects</h2>
-        
-        <div class="projects-grid">
-            
-            <!-- Project 1: Quiz Game -->
-            <div class="project-card" style="border-color: #38bdf8;">
-                <div class="project-info">
-                    <h3>1. Quiz-Game</h3>
-                    <p>An interactive web-based quiz application featuring multiple categories, instant score calculation, and dynamic progress tracking.</p>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/farhad-web-dev/Quiz-game-" target="_blank" class="proj-link code-link">View Code</a>
-                    <a href="https://farhad-web-dev.github.io/Quiz-game-/" target="_blank" class="proj-link demo-link">Live Demo</a>
-                </div>
-            </div>
+    <script>
+        const c = document.getElementById("game");
+        const ctx = c.getContext("2d");
+        c.width = window.innerWidth;
+        c.height = window.innerHeight;
 
-            <!-- Project 2: Tic-Tac-Toe Game -->
-            <div class="project-card" style="border-color: #4ade80;">
-                <div class="project-info">
-                    <h3>2. Tic-Tac-Toe Game</h3>
-                    <p>A classic 2-player grid board game with interactive state tracking, smooth UI transitions, and instant win/draw logic detection.</p>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/farhad-web-dev/tic-tac-toe." target="_blank" class="proj-link code-link">View Code</a>
-                    <a href="/tic-tac-toe./" target="_blank" class="proj-link demo-link">Live Demo</a>
-                </div>
-            </div>
+        let lane = 1; // 0=Left, 1=Center, 2=Right
+        let score = 0;
+        let speed = 8;
+        let enemies = [];
+        let gameActive = true;
 
-            <!-- Project 3: Firdoshosiery Template -->
-            <div class="project-card" style="border-color: #fbbf24;">
-                <div class="project-info">
-                    <h3>3. Firdos Hosiery Website</h3>
-                    <p>A sleek, modern shopping UI template customized for a hosiery business, highlighting categories and smooth responsive layout designs.</p>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/farhad-web-dev/Firdoshosiery" target="_blank" class="proj-link code-link">View Code</a>
-                    <a href="/Firdoshosiery/" target="_blank" class="proj-link demo-link">Live Demo</a>
-                </div>
-            </div>
+        function getLaneX(l) {
+            return (c.width / 3) * l + (c.width / 6) - 25;
+        }
 
-            <!-- Project 4: Simple Calculator -->
-            <div class="project-card" style="border-color: #f43f5e;">
-                <div class="project-info">
-                    <h3>4. Simple Calculator</h3>
-                    <p>A quick-access mathematical calculator built with modern glassmorphism styling to solve equations on grid layouts.</p>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/farhad-web-dev/Calculator-" target="_blank" class="proj-link code-link">View Code</a>
-                    <a href="/Calculator-/" target="_blank" class="proj-link demo-link">Live Demo</a>
-                </div>
-            </div>
+        function drawCar(x, y, color) {
+            ctx.fillStyle = color;
+            ctx.fillRect(x, y, 50, 80);
+        }
 
-            <!-- Project 5: Infinite Runner Game -->
-            <div class="project-card" style="border-color: #ec4899;">
-                <div class="project-info">
-                    <h3>5. Runner Game</h3>
-                    <p>An endless arcade running canvas game with jump mechanics, auto-spawning obstacles, and high-score tracking.</p>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/farhad-web-dev/Infinite-Runner-Game" target="_blank" class="proj-link code-link">View Code</a>
-                    <a href="/Infinite-Runner-Game/" target="_blank" class="proj-link demo-link">Live Demo</a>
-                </div>
-            </div>
+        // Touch Control - 3 Lanes Logic
+        window.addEventListener("touchstart", e => {
+            let touchX = e.touches[0].clientX;
+            lane = Math.floor(touchX / (c.width / 3));
+        });
 
-            <!-- Project 6: 2D Craft Sandbox Game -->
-            <div class="project-card" style="border-color: #10b981;">
-                <div class="project-info">
-                    <h3>6. 2D Craft Game</h3>
-                    <p>A block-building 2D sandbox grid map inspired by block builders, allowing placing and destroying grid materials.</p>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/farhad-web-dev/2D-Craft-Mini-Game" target="_blank" class="proj-link code-link">View Code</a>
-                    <a href="/2D-Craft-Mini-Game/" target="_blank" class="proj-link demo-link">Live Demo</a>
-                </div>
-            </div>
+        function update() {
+            if (!gameActive) return;
+            ctx.clearRect(0, 0, c.width, c.height);
 
-        </div>
-    </div>
+            // Road
+            ctx.fillStyle = "#333";
+            ctx.fillRect(0, 0, c.width, c.height);
 
-    <footer>
-        <p>&copy; 2026 Farhad Dev. Built with HTML, CSS & JavaScript.</p>
-    </footer>
+            // Enemies
+            if (Math.random() < 0.05) {
+                enemies.push({ x: getLaneX(Math.floor(Math.random()*3)), y: -100 });
+            }
 
+            enemies.forEach((e, i) => {
+                e.y += speed;
+                drawCar(e.x, e.y, "red");
+                
+                // Collision
+                let playerX = getLaneX(lane);
+                if (Math.abs(playerX - e.x) < 40 && Math.abs(c.height - 150 - e.y) < 70) {
+                    gameActive = false;
+                    alert("Game Over! Score: " + score);
+                    location.reload();
+                }
+                if (e.y > c.height) { enemies.splice(i, 1); score++; }
+            });
+
+            // Player
+            drawCar(getLaneX(lane), c.height - 150, "cyan");
+
+            document.getElementById("ui").innerText = "Score: " + score;
+            requestAnimationFrame(update);
+        }
+
+        update();
+    </script>
 </body>
 </html>
