@@ -3,128 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Gaming & Project Portfolio</title>
+    <title>Farhad Dev | Developer Portfolio</title>
     <style>
-        /* Base Styling */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #0f172a; color: #f8fafc; padding: 20px; }
-        
-        header { text-align: center; margin-bottom: 40px; padding: 20px 0; border-bottom: 2px solid #1e293b; }
-        header h1 { color: #38bdf8; font-size: 2.5rem; margin-bottom: 10px; }
-        header p { color: #94a3b8; font-size: 1.1rem; }
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+        }
 
-        /* Projects Grid */
-        .projects-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; }
-        .project-card { background-color: #1e293b; border: 1px solid #334155; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-        .project-card:hover { transform: translateY(-5px); transition: transform 0.3s ease; border-color: #38bdf8; }
-        
-        .project-info { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .project-info h3 { color: #38bdf8; font-size: 1.4rem; margin-bottom: 10px; }
-        .project-info p { color: #cbd5e1; font-size: 0.95rem; line-height: 1.5; margin-bottom: 20px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-        /* Project Links & Buttons */
-        .project-links { display: flex; gap: 10px; }
-        .proj-link { flex: 1; text-align: center; padding: 10px; text-decoration: none; font-weight: bold; border-radius: 6px; font-size: 0.9rem; transition: background 0.2s; }
-        .code-link { background-color: #334155; color: #f8fafc; border: 1px solid #475569; }
-        .code-link:hover { background-color: #475569; }
-        .demo-link { background-color: #38bdf8; color: #0f172a; }
-        .demo-link:hover { background-color: #7dd3fc; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .main-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin: 30px 0 20px 0;
+            border-bottom: 2px solid var(--card-bg);
+            padding-bottom: 8px;
+            color: var(--accent);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            border-left: 5px solid var(--accent);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .project-info p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .proj-link {
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .code-link {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--text-muted);
+        }
+
+        .code-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .demo-link {
+            background-color: var(--accent);
+            color: #000;
+        }
+
+        .demo-link:hover {
+            opacity: 0.9;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Farhad's Project Portfolio</h1>
-        <p>Welcome to my creative space! Here are the games and applications I've developed.</p>
+        <h1>Farhad Dev</h1>
+        <p>Frontend Developer & Game Creator | Building Web Apps & Interactive Canvas Games</p>
     </header>
 
-    <main class="projects-container">
-
-        <!-- Project 1: 2D Craft PRO MAX -->
-        <div class="project-card">
-            <div class="project-info">
-                <div>
-                    <h3>1. 2D Craft PRO MAX</h3>
-                    <p>A Minecraft-inspired 2D world generation and crafting block game built using HTML Canvas and JavaScript.</p>
+    <div class="main-container">
+        <h2 class="section-title">My Projects</h2>
+        
+        <div class="projects-grid">
+            
+            <!-- Project 1: Quiz Game -->
+            <div class="project-card" style="border-color: #38bdf8;">
+                <div class="project-info">
+                    <h3>1. Quiz-Game</h3>
+                    <p>An interactive web-based quiz application featuring multiple categories, instant score calculation, and dynamic progress tracking.</p>
                 </div>
                 <div class="project-links">
-                    <a href="#" target="_blank" class="proj-link code-link">View Code</a>
-                    <a href="#" target="_blank" class="proj-link demo-link">Live Demo</a>
+                    <a href="https://github.com/farhad-web-dev/Quiz-game-" target="_blank" class="proj-link code-link">View Code</a>
+                    <a href="/Quiz-game-/" target="_blank" class="proj-link demo-link">Live Demo</a>
                 </div>
             </div>
-        </div>
 
-        <!-- Project 2: Tic-Tac-Toe Game (ASLI REAL LINK CONNECTED) -->
-        <div class="project-card" style="border-color: #4ade80;">
-            <div class="project-info">
-                <div>
+            <!-- Project 2: Tic-Tac-Toe Game -->
+            <div class="project-card" style="border-color: #4ade80;">
+                <div class="project-info">
                     <h3>2. Tic-Tac-Toe Game</h3>
-                    <p>A classic 2-player grid board game with interactive state tracking and instant win/draw logic detection.</p>
+                    <p>A classic 2-player grid board game with interactive state tracking, smooth UI transitions, and instant win/draw logic detection.</p>
                 </div>
                 <div class="project-links">
-                    <a href="https://github.com/shahguftamalik5-crypto/tic-tac-toe" target="_blank" class="proj-link code-link">View Code</a>
-                    <a href="https://shahguftamalik5-crypto.github.io/tic-tac-toe/" target="_blank" class="proj-link demo-link">Live Demo</a>
+                    <a href="https://github.com/farhad-web-dev/tic-tac-toe." target="_blank" class="proj-link code-link">View Code</a>
+                    <a href="/tic-tac-toe./" target="_blank" class="proj-link demo-link">Live Demo</a>
                 </div>
             </div>
-        </div>
 
-        <!-- Project 3: Simple Calculator -->
-        <div class="project-card">
-            <div class="project-info">
-                <div>
-                    <h3>3. Simple Calculator</h3>
-                    <p>A clean, fully functional web calculator designed for quick mathematical operations and equations.</p>
+            <!-- Project 3: Firdoshosiery Template -->
+            <div class="project-card" style="border-color: #fbbf24;">
+                <div class="project-info">
+                    <h3>3. Firdos Hosiery Website</h3>
+                    <p>A sleek, modern shopping UI template customized for a hosiery business, highlighting categories and smooth responsive layout designs.</p>
                 </div>
                 <div class="project-links">
-                    <a href="#" target="_blank" class="proj-link code-link">View Code</a>
-                    <a href="#" target="_blank" class="proj-link demo-link">Live Demo</a>
+                    <a href="https://github.com/farhad-web-dev/Firdoshosiery" target="_blank" class="proj-link code-link">View Code</a>
+                    <a href="/Firdoshosiery/" target="_blank" class="proj-link demo-link">Live Demo</a>
                 </div>
             </div>
-        </div>
 
-        <!-- Project 4: Runner Game -->
-        <div class="project-card">
-            <div class="project-info">
-                <div>
-                    <h3>4. Car Runner PRO MAX</h3>
-                    <p>An endless scrolling arcade game featuring dodge mechanisms, dynamic obstacle spawning, and score systems.</p>
+            <!-- Project 4: Simple Calculator (Coming Soon) -->
+            <div class="project-card" style="border-color: #f43f5e;">
+                <div class="project-info">
+                    <h3>4. Simple Calculator</h3>
+                    <p>A quick-access mathematical calculator built with modern styling to solve basic equations, grid button layouts, and clear logs.</p>
                 </div>
                 <div class="project-links">
-                    <a href="#" target="_blank" class="proj-link code-link">View Code</a>
-                    <a href="#" target="_blank" class="proj-link demo-link">Live Demo</a>
+                    <a href="#" class="proj-link code-link" style="opacity: 0.5; pointer-events: none;">Soon</a>
+                    <a href="#" class="proj-link demo-link" style="opacity: 0.5; pointer-events: none; background-color: var(--text-muted);">In Progress</a>
                 </div>
             </div>
-        </div>
 
-        <!-- Project 5: Puzzle Game -->
-        <div class="project-card">
-            <div class="project-info">
-                <div>
-                    <h3>5. Mind Puzzle Blocks</h3>
-                    <p>A sliding tile and rearrangement grid puzzle game to test logic skills, speed, and positioning memory.</p>
-                </div>
-                <div class="project-links">
-                    <a href="#" target="_blank" class="proj-link code-link">View Code</a>
-                    <a href="#" target="_blank" class="proj-link demo-link">Live Demo</a>
-                </div>
-            </div>
         </div>
+    </div>
 
-        <!-- Project 6: Quiz Game -->
-        <div class="project-card">
-            <div class="project-info">
-                <div>
-                    <h3>6. Smart Tech Quiz</h3>
-                    <p>An interactive trivia app with multiple choice questions, live tracking score counters, and final performance evaluations.</p>
-                </div>
-                <div class="project-links">
-                    <a href="#" target="_blank" class="proj-link code-link">View Code</a>
-                    <a href="#" target="_blank" class="proj-link demo-link">Live Demo</a>
-                </div>
-            </div>
-        </div>
-
-    </main>
+    <footer>
+        <p>&copy; 2026 Farhad Dev. Built with HTML, CSS & JavaScript.</p>
+    </footer>
 
 </body>
 </html>
